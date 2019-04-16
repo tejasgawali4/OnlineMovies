@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-          val rvAdapter = MoviesListAdapter(MovieList as List<Movies>)
+          val rvAdapter = MoviesListAdapter(MovieList as List<Movies>, applicationContext)
 //        set the recyclerView to the adapter
           recyclerView!!.adapter = rvAdapter;
 
@@ -94,13 +94,15 @@ class MainActivity : AppCompatActivity() {
 
   fun RecyclerView.addOnItemClickListener(onClickListener: OnItemClickListener) {
     this.addOnChildAttachStateChangeListener(object: RecyclerView.OnChildAttachStateChangeListener {
-      override fun onChildViewAttachedToWindow(p0: View) {
-        val holder = getChildViewHolder(p0)
-        onClickListener.onItemClicked(holder.adapterPosition, p0)
-      }
-
       override fun onChildViewDetachedFromWindow(p0: View) {
         p0?.setOnClickListener(null)
+      }
+
+      override fun onChildViewAttachedToWindow(p0: View) {
+        p0?.setOnClickListener({
+          val holder = getChildViewHolder(p0)
+          onClickListener.onItemClicked(holder.adapterPosition, p0)
+        })
       }
     })
   }
