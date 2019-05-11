@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-  <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,46 +10,41 @@
     android:layout_marginTop="0dp"
     card_view:cardCornerRadius="4dp">
 
-    <FrameLayout
-      android:id="@+id/movie_container"
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
+  <LinearLayout
+    android:id="@+id/movie_container"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:layout_margin="1dp"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+      android:id="@+id/movie_poster"
       android:layout_width="match_parent"
-      android:layout_height="200dp"
-      android:layout_gravity="center"
-      android:clickable="true"
-      android:layout_margin="1dp"
-      android:foreground="?attr/selectableItemBackground">
+      android:layout_height="171dp"
+      android:scaleType="centerCrop" android:contentDescription="TODO"
+      android:background="@drawable/loading"/>
 
-      <ImageView
-        android:id="@+id/movie_poster"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" android:contentDescription="TODO"
-        android:background="@drawable/loading"/>
+    <TextView
+      android:id="@+id/mName"
+      android:layout_width="match_parent"
+      android:layout_height="30dp"
+      android:layout_gravity="bottom"
+      android:gravity="center"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:textColor="@android:color/white"
+      android:textSize="12sp" android:background="@android:color/black"/>
+    <Button
+      android:text="Watch Now"
+      android:background="@color/colorPrimaryDark"
+      android:textColor="@android:color/white"
+      android:textSize="12sp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" android:id="@+id/btnWatchNow"/>
 
-      <View
-        android:id="@+id/title_background"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:alpha="0.8"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"/>
+  </LinearLayout>
 
-      <TextView
-        android:id="@+id/mName"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"/>
-
-    </FrameLayout>
-
-  </android.support.v7.widget.CardView>
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

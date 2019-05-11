@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import com.github.se_bastiaan.torrentstream.StreamStatus;
 import com.github.se_bastiaan.torrentstream.Torrent;
 import com.github.se_bastiaan.torrentstream.TorrentOptions;
@@ -26,6 +27,7 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
   private static final String TORRENT = "Torrent";
   private Button button;
   private ProgressBar progressBar;
+  private TextView prgrs;
   private TorrentStream torrentStream;
 
   private String streamUrl = "magnet:?xt=urn:btih:67F7AEB1BC1B75EE549DAC2A2086249C55AEA246&dn=Kesari%20%282019%29%20Hindi%20720p%20Pre-DVDRip%20x264%20AAC%20%20-%20%5bTeam%20MS%5d&tr=udp%3a%2f%2fcoppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.zer0day.to%3a1337%2fannounce\n" +
@@ -35,7 +37,7 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
     @Override
     public void onClick(View v) {
 
-      progressBar.setProgress(0);
+      prgrs.setText("0");
       if(torrentStream.isStreaming()) {
         torrentStream.stopStream();
         button.setText("Start stream");
@@ -74,9 +76,10 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
 
     button = findViewById(R.id.button);
     button.setOnClickListener(onClickListener);
-    progressBar = findViewById(R.id.progress);
+    progressBar = findViewById(R.id.progressBar);
+    prgrs = findViewById(R.id.prrogress);
 
-    progressBar.setMax(100);
+    prgrs.setText("100");
   }
 
   @Override
@@ -108,7 +111,7 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
 
   @Override
   public void onStreamReady(Torrent torrent) {
-    progressBar.setProgress(100);
+    prgrs.setText("100");
     Log.d(TORRENT, "onStreamReady: " + torrent.getVideoFile());
 
     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(torrent.getVideoFile().toString()));
@@ -120,7 +123,7 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
   public void onStreamProgress(Torrent torrent, StreamStatus status) {
     if(status.bufferProgress <= 100 && progressBar.getProgress() < 100 && progressBar.getProgress() != status.bufferProgress) {
       Log.d(TORRENT, "Progress: " + status.bufferProgress);
-      progressBar.setProgress(status.bufferProgress);
+      prgrs.setText(status.bufferProgress);
     }
   }
 
