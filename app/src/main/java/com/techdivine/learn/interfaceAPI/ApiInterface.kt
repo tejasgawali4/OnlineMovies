@@ -10,7 +10,7 @@ public interface ApiInterface {
   //  https://api.myjson.com/bins/17fx2e
   //  https://api.myjson.com/bins/13myie
 
-  @GET("API/data.json")
+  @GET("data.json")
   abstract fun getMovielist(@Query("key") key: String): Call<List<Movies>>
 
 }

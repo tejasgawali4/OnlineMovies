@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.techdivine.learn.Adapter.MoviesListAdapter
 import com.techdivine.learn.Model.Movies
 import com.techdivine.learn.api.APIClient
@@ -57,14 +58,11 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-          progressBar!!.visibility == View.GONE
-
-
-//          if(MovieList!!.isEmpty()){
-//            progressBar!!.visibility == View.VISIBLE
-//          }else{
-//            progressBar!!.visibility == View.GONE
-//          }
+          if(MovieList!!.isEmpty()){
+            progressBar!!.visibility == View.VISIBLE
+          }else{
+            progressBar!!.visibility == View.GONE
+          }
 
           val rvAdapter = MoviesListAdapter(MovieList as List<Movies>, applicationContext)
 //        set the recyclerView to the adapter
