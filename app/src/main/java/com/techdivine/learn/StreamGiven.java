@@ -22,6 +22,7 @@ import com.github.se_bastiaan.torrentstream.listeners.TorrentListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+
 public class StreamGiven extends AppCompatActivity implements TorrentListener {
 
   private static final String TORRENT = "Torrent";
@@ -32,21 +33,6 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
 
   private String streamUrl = "magnet:?xt=urn:btih:67F7AEB1BC1B75EE549DAC2A2086249C55AEA246&dn=Kesari%20%282019%29%20Hindi%20720p%20Pre-DVDRip%20x264%20AAC%20%20-%20%5bTeam%20MS%5d&tr=udp%3a%2f%2fcoppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.zer0day.to%3a1337%2fannounce\n" +
     "magnet:?xt=urn:btih:8BCFE15FCE5EF713083E9996B6A085402DED122D&dn=VA%20-%20Top%20Hits%20%2809.Jan.2019%29%20%5bMp3%20-%20320kbps%5d%20%5bWR%20Music%5d&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2fzer0day.ch%3a1337&tr=udp%3a%2f%2fopen.demonii.com%3a1337&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2fexodus.desync.com%3a6969&tr=udp%3a%2f%2ftracker.dler.org%3a6969%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2ftracker.filemail.com%3a6969%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2ftracker.skynetcloud.tk%3a6969%2fannounce&tr=udp%3a%2f%2fretracker.sevstar.net%3a2710%2fannounce&tr=udp%3a%2f%2ftracker.beeimg.com%3a6969%2fannounce&tr=udp%3a%2f%2f00.syo.mx%3a53%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2fnewtoncity.org%3a6969%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2fretracker.lanta-net.ru%3a2710%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2ftorrentclub.tech%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.moeking.me%3a6969%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2ftracker.port443.xyz%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.birkenwald.de%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.torrent.eu.org%3a451%2fannounce&tr=udp%3a%2f%2fthetracker.org%3a80%2fannounce&tr=udp%3a%2f%2fexodus.desync.com%3a6969%2fannounce&tr=udp%3a%2f%2fdenis.stalker.upeer.me%3a6969%2fannounce&tr=udp%3a%2f%2fbigfoot1942.sektori.org%3a6969%2fannounce&tr=udp%3a%2f%2fretracker.hotplug.ru%3a2710%2fannounce&tr=udp%3a%2f%2ftracker.filepit.to%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.dyn.im%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.cyberia.is%3a6969%2fannounce&tr=udp%3a%2f%2fopen.demonii.si%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.nyaa.uk%3a6969%2fannounce&tr=udp%3a%2f%2fprestige.minimafia.nl%3a443%2fannounce&tr=udp%3a%2f%2fretracker.netbynet.ru%3a2710%2fannounce&tr=%2fannounce&tr=udp%3a%2f%2fhk1.opentracker.ga%3a6969%2fannounce&tr=udp%3a%2f%2fipv4.tracker.harry.lu%3a80";
-
-  View.OnClickListener onClickListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-
-      prgrs.setText("0");
-      if(torrentStream.isStreaming()) {
-        torrentStream.stopStream();
-        button.setText("Start stream");
-        return;
-      }
-      torrentStream.startStream(streamUrl);
-      button.setText("Stop stream");
-    }
-  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +52,9 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
       }
     }
 
+    progressBar = findViewById(R.id.progressBar);
+    prgrs = findViewById(R.id.prrogress);
+
     TorrentOptions torrentOptions = new TorrentOptions.Builder()
       .saveLocation(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
       .removeFilesAfterStop(true)
@@ -74,12 +63,16 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
     torrentStream = TorrentStream.init(torrentOptions);
     torrentStream.addListener(this);
 
-    button = findViewById(R.id.button);
-    button.setOnClickListener(onClickListener);
-    progressBar = findViewById(R.id.progressBar);
-    prgrs = findViewById(R.id.prrogress);
+    prgrs.setText("0 %");
+    progressBar.setProgress(0);
+/*    if(torrentStream.isStreaming()) {
+      torrentStream.stopStream();
+      return;
+    }*/
+    torrentStream.startStream(streamUrl);
 
-    prgrs.setText("100");
+    progressBar.setMax(100);
+
   }
 
   @Override
@@ -106,12 +99,11 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
   @Override
   public void onStreamError(Torrent torrent, Exception e) {
     Log.e(TORRENT, "onStreamError", e);
-    button.setText("Start stream");
   }
 
   @Override
   public void onStreamReady(Torrent torrent) {
-    prgrs.setText("100");
+    progressBar.setProgress(100);
     Log.d(TORRENT, "onStreamReady: " + torrent.getVideoFile());
 
     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(torrent.getVideoFile().toString()));
@@ -123,7 +115,8 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
   public void onStreamProgress(Torrent torrent, StreamStatus status) {
     if(status.bufferProgress <= 100 && progressBar.getProgress() < 100 && progressBar.getProgress() != status.bufferProgress) {
       Log.d(TORRENT, "Progress: " + status.bufferProgress);
-      prgrs.setText(status.bufferProgress);
+      prgrs.setText(status.bufferProgress +" %");
+      progressBar.setProgress(status.bufferProgress);
     }
   }
 
@@ -131,6 +124,12 @@ public class StreamGiven extends AppCompatActivity implements TorrentListener {
   public void onStreamStopped() {
     Log.d(TORRENT, "onStreamStopped");
   }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
 
 
 }

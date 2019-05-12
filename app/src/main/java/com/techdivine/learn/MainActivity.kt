@@ -1,15 +1,12 @@
 package com.techdivine.learn
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.techdivine.learn.Adapter.MoviesListAdapter
 import com.techdivine.learn.Model.Movies
 import com.techdivine.learn.api.APIClient
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     apiInterface = APIClient.client.create(ApiInterface::class.java)
 
-    val call1 = apiInterface.getMovie_list("cj")
+    val call1 = apiInterface.getMovielist("12345")
 
     call1.enqueue(object : Callback<List<Movies>> {
       override fun onResponse(call: Call<List<Movies>>, response: Response<List<Movies>>) {
@@ -60,11 +57,14 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-          if(MovieList!!.isEmpty()){
-            progressBar!!.visibility == View.VISIBLE
-          }else{
-            progressBar!!.visibility == View.GONE
-          }
+          progressBar!!.visibility == View.GONE
+
+
+//          if(MovieList!!.isEmpty()){
+//            progressBar!!.visibility == View.VISIBLE
+//          }else{
+//            progressBar!!.visibility == View.GONE
+//          }
 
           val rvAdapter = MoviesListAdapter(MovieList as List<Movies>, applicationContext)
 //        set the recyclerView to the adapter

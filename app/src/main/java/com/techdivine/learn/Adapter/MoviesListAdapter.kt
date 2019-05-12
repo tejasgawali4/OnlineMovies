@@ -1,6 +1,5 @@
 package com.techdivine.learn.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
@@ -37,13 +36,13 @@ class MoviesListAdapter(private val MovieList: List<Movies>,context : Context) :
 
     v.name?.text = MovieList[p1].mName.toString()
 
-    //Glide.with(context).load(MovieList[p1].mBannerUrl.toString()).into(v.movie_poster);
+    Glide.with(mcontext).load(MovieList[p1].mBannerUrl.toString()).into(v.movie_poster);
 
     v.btnWathc.setOnClickListener {
       Log.d("onItemClickEvent :- " , "" + MovieList[p1].mName.toString())
       val intent = Intent(mcontext, StreamGiven::class.java)
       // To pass any data to next activity
-      intent.putExtra("keyIdentifier", "ok")
+      intent.putExtra("url", MovieList[p1].url.toString())
       // start your next activity
       startActivity(v.btnWathc.context,intent,null)
     }
@@ -54,6 +53,7 @@ class MoviesListAdapter(private val MovieList: List<Movies>,context : Context) :
     val name = itemView.findViewById<TextView>(R.id.mName)
     val movie_poster = itemView.findViewById<ImageView>(R.id.movie_poster)
     val btnWathc = itemView.findViewById<Button>(R.id.btnWatchNow)
+
   }
-//
+
 }

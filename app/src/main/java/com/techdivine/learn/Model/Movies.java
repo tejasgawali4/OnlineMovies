@@ -25,7 +25,19 @@ public class Movies {
   private String likes;
   @SerializedName("created_date")
   @Expose
+  private String url;
+  @SerializedName("url")
+  @Expose
+
   private String createdDate;
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
 
   public String getMId() {
     return mId;
