@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.techdivine.learn.Adapter.MoviesListAdapter
 import com.techdivine.learn.Model.Movies
 import com.techdivine.learn.api.APIClient
@@ -27,9 +26,9 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    progressBar = findViewById<ProgressBar>(R.id.progressBar)
+    progressBar = findViewById(R.id.progressBar)
 
-    recyclerView = findViewById<RecyclerView>(R.id.movies_r_list) as RecyclerView
+    recyclerView = findViewById(R.id.movies_r_list)
 
     recyclerView!!.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun getLatestUpdate() {
 
-    progressBar!!.visibility == View.VISIBLE
+    progressBar!!.visibility = View.VISIBLE
 
     apiInterface = APIClient.client.create(ApiInterface::class.java)
 
@@ -58,11 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-          if(MovieList!!.isEmpty()){
-            progressBar!!.visibility == View.VISIBLE
-          }else{
-            progressBar!!.visibility == View.GONE
-          }
+          progressBar!!.visibility = View.GONE
 
           val rvAdapter = MoviesListAdapter(MovieList as List<Movies>, applicationContext)
 //        set the recyclerView to the adapter

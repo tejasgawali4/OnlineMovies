@@ -43,6 +43,8 @@ class MoviesListAdapter(private val MovieList: List<Movies>,context : Context) :
       val intent = Intent(mcontext, StreamGiven::class.java)
       // To pass any data to next activity
       intent.putExtra("url", MovieList[p1].url.toString())
+      Log.d("url :- " , "" + MovieList[p1].url.toString())
+
       // start your next activity
       startActivity(v.btnWathc.context,intent,null)
     }

@@ -25,11 +25,11 @@ public class Movies {
   private String likes;
   @SerializedName("created_date")
   @Expose
-  private String url;
+  private String createdDate;
   @SerializedName("url")
   @Expose
+  private String url;
 
-  private String createdDate;
 
   public String getUrl() {
     return url;
