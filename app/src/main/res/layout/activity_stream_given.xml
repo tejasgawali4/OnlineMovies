@@ -4,22 +4,27 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".StreamGiven">
+              android:orientation="vertical"
+              tools:context=".StreamGiven" android:background="@android:color/black">
 
-  <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Start stream"
-    android:id="@+id/button"
-    android:layout_gravity="center_horizontal" android:gravity="center_vertical"
-    android:foregroundGravity="center"/>
 
   <ProgressBar
-    android:id="@+id/progress"
+    android:id="@+id/progressBar"
+    style="?android:attr/progressBarStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:visibility="gone"/>
+
+  <TextView
+    android:text="Please Wait While Prepering Stream... "
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:indeterminate="false"
-    android:max="100"
-    style="?android:attr/progressBarStyleHorizontal"/>
+    android:layout_height="wrap_content" android:id="@+id/textView"
+    android:textColor="@android:color/holo_orange_light" android:textSize="30sp" android:padding="15dp"/>
+  <TextView
+    android:text="0 %"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:id="@+id/prrogress" android:layout_gravity="center|fill"
+    android:gravity="center" android:textStyle="bold" android:textSize="30sp"
+    android:textColorLink="@android:color/holo_green_light" android:visibility="visible"
+    android:textColor="@android:color/holo_green_light"/>
 
 </LinearLayout>

@@ -18,7 +18,7 @@ object APIClient {
 
 
       retrofit = Retrofit.Builder()
-        .baseUrl("https://wwwtejasgawaliga.000webhostapp.com/techdivine_learn/")
+        .baseUrl("https://wwwtejasgawaliga.000webhostapp.com/API/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
